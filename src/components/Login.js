@@ -12,7 +12,6 @@ const Login = () => {
   const handleSubmit = e => {
     e.preventDefault()
     setErrors({})
-    console.log(user)
     axios
       .post('/api/users/login', user)
       .then(res => {

@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import keys_prod from '../config/keys_prod'
+import keys_dev from '../config/keys_dev'
+
+const { api } = process.env.NODE_ENV === 'production' ? keys_prod : keys_dev
 
 const Register = () => {
   const [user, setUser] = useState({
@@ -18,7 +22,7 @@ const Register = () => {
     e.preventDefault()
     setErrors({})
     axios
-      .post('/api/users/register', user)
+      .post(`${api}/api/users/register`, user)
       .then(res => {
         console.log(res.data)
       })
@@ -26,6 +30,7 @@ const Register = () => {
         setErrors({ ...err.response.data })
       })
   }
+
   return (
     <div>
       <h1>Register</h1>
@@ -37,6 +42,7 @@ const Register = () => {
           onChange={handleChange}
           value={user.username}
         />
+        {errors.username && <p>{errors.username}</p>}
 
         <label>Email</label>
         <input
@@ -45,6 +51,7 @@ const Register = () => {
           onChange={handleChange}
           value={user.email}
         />
+        {errors.email && <p>{errors.email}</p>}
 
         <label>Password</label>
         <input
@@ -53,6 +60,7 @@ const Register = () => {
           onChange={handleChange}
           value={user.password}
         />
+        {errors.password && <p>{errors.password}</p>}
 
         <label>Confirm Password</label>
         <input
@@ -61,6 +69,9 @@ const Register = () => {
           onChange={handleChange}
           value={user.password2}
         />
+        {errors.password2 && <p>{errors.password2}</p>}
+
+        {errors.message && <p>{errors.message}</p>}
 
         <input type='submit' value='Register' />
       </form>
