@@ -12,7 +12,7 @@ const HomePage = () => {
     axios
       .get(`${api}/api/movies`)
       .then(res => {
-        setMovies([res.data])
+        setMovies([...res.data])
       })
       .catch(err => console.log(err.message))
   }, [])

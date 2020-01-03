@@ -5,7 +5,9 @@ const MovieList = ({ movies }) => {
   return (
     <div>
       <h2>MovieList component</h2>
-      <MovieCard />
+      {movies.map(movie => {
+        return <MovieCard key={movie.id} movie={movie} />
+      })}
     </div>
   )
 }
