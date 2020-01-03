@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
 import axios from 'axios'
+import { Form, Button } from 'react-bootstrap'
+import { keys_dev, keys_prod } from '../config/keys'
+
+const { api } = process.env.NODE_ENV === 'production' ? keys_prod : keys_dev
 
 const Login = () => {
   const [user, setUser] = useState({ email: '', password: '' })
@@ -13,7 +17,7 @@ const Login = () => {
     e.preventDefault()
     setErrors({})
     axios
-      .post('/api/users/login', user)
+      .post(`${api}/api/users/login`, user)
       .then(res => {
         console.log(res.data)
       })
@@ -23,27 +27,39 @@ const Login = () => {
   }
   return (
     <div>
-      <h1>Login</h1>
+      <h2>Login</h2>
       <form onSubmit={handleSubmit}>
-        <label>Email</label>
-        <input
-          name='email'
-          type='email'
-          onChange={handleChange}
-          value={user.email}
-        />
-        {errors.email && <p>{errors.email}</p>}
+        <Form.Group controlId='formBasicEmail'>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            name='email'
+            onChange={handleChange}
+            value={user.email}
+            type='email'
+            placeholder='Enter email'
+          />
+          {errors.email && (
+            <Form.Text className='text-muted'>{errors.email}</Form.Text>
+          )}
+        </Form.Group>
 
-        <label>Password</label>
-        <input
-          name='password'
-          type='password'
-          onChange={handleChange}
-          value={user.password}
-        />
-        {errors.password && <p>{errors.password}</p>}
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name='password'
+            onChange={handleChange}
+            value={user.password}
+            type='password'
+            placeholder='Password'
+          />
+          {errors.password && (
+            <Form.Text className='text-muted'>{errors.password}</Form.Text>
+          )}
+        </Form.Group>
 
-        <input type='submit' value='Login' />
+        <Button variant='primary' type='submit'>
+          Submit
+        </Button>
       </form>
     </div>
   )
