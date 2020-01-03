@@ -15,7 +15,7 @@ const HomePage = () => {
         setMovies([res.data])
       })
       .catch(err => console.log(err.message))
-  }, [movies])
+  }, [])
 
   return (
     <div>
