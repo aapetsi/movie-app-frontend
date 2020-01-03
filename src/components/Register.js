@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import keys_prod from '../config/keys_prod'
-import keys_dev from '../config/keys_dev'
+import { Form, Button } from 'react-bootstrap'
+import { keys_dev, keys_prod } from '../config/keys'
 
 const { api } = process.env.NODE_ENV === 'production' ? keys_prod : keys_dev
 
@@ -33,47 +33,69 @@ const Register = () => {
 
   return (
     <div>
-      <h1>Register</h1>
+      <h4>Register</h4>
       <form onSubmit={handleSubmit}>
-        <label>Username</label>
-        <input
-          name='username'
-          type='text'
-          onChange={handleChange}
-          value={user.username}
-        />
-        {errors.username && <p>{errors.username}</p>}
+        <Form.Group>
+          <Form.Label>Username</Form.Label>
+          <Form.Control
+            name='username'
+            type='text'
+            onChange={handleChange}
+            value={user.username}
+            placeholder='Enter username'
+          />
+          {errors.username && (
+            <Form.Text className='text-muted'>{errors.username}</Form.Text>
+          )}
+        </Form.Group>
 
-        <label>Email</label>
-        <input
-          name='email'
-          type='email'
-          onChange={handleChange}
-          value={user.email}
-        />
-        {errors.email && <p>{errors.email}</p>}
+        <Form.Group controlId='formBasicEmail'>
+          <Form.Label>Email address</Form.Label>
+          <Form.Control
+            name='email'
+            onChange={handleChange}
+            value={user.email}
+            type='email'
+            placeholder='Enter email'
+          />
+          {errors.email && (
+            <Form.Text className='text-muted'>{errors.email}</Form.Text>
+          )}
+        </Form.Group>
 
-        <label>Password</label>
-        <input
-          name='password'
-          type='password'
-          onChange={handleChange}
-          value={user.password}
-        />
-        {errors.password && <p>{errors.password}</p>}
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name='password'
+            onChange={handleChange}
+            value={user.password}
+            type='password'
+            placeholder='Password'
+          />
+          {errors.password && (
+            <Form.Text className='text-muted'>{errors.password}</Form.Text>
+          )}
+        </Form.Group>
 
-        <label>Confirm Password</label>
-        <input
-          name='password2'
-          type='password'
-          onChange={handleChange}
-          value={user.password2}
-        />
-        {errors.password2 && <p>{errors.password2}</p>}
+        <Form.Group controlId='formBasicPassword'>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            name='password2'
+            onChange={handleChange}
+            value={user.password}
+            type='password'
+            placeholder='Confirm Password'
+          />
+          {errors.password2 && (
+            <Form.Text className='text-muted'>{errors.password2}</Form.Text>
+          )}
+        </Form.Group>
 
         {errors.message && <p>{errors.message}</p>}
 
-        <input type='submit' value='Register' />
+        <Button variant='primary' type='submit'>
+          Register
+        </Button>
       </form>
     </div>
   )

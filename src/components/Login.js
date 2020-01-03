@@ -27,7 +27,7 @@ const Login = () => {
   }
   return (
     <div>
-      <h2>Login</h2>
+      <h4>Login</h4>
       <form onSubmit={handleSubmit}>
         <Form.Group controlId='formBasicEmail'>
           <Form.Label>Email address</Form.Label>
@@ -58,7 +58,7 @@ const Login = () => {
         </Form.Group>
 
         <Button variant='primary' type='submit'>
-          Submit
+          Login
         </Button>
       </form>
     </div>
