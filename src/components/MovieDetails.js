@@ -11,13 +11,14 @@ const MovieDetails = props => {
   useEffect(() => {
     Axios.get(`${api}/api/movies/${movieId}`)
       .then(res => {
-        console.log(res.data)
-        setMovie(res.data)
+        const movieDetails = res.data
+        setMovie(movieDetails)
       })
       .catch(err => {
         console.log(err.response)
       })
-  }, [movieId])
+  }, [movieId, movie])
+
   return (
     <div>
       <h4>{movie.title}</h4>
@@ -25,14 +26,8 @@ const MovieDetails = props => {
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt='poster'
       />
-
       <p>{movie.overview}</p>
       <p>Genres</p>
-      <ul>
-        {movie.genres.map((genre, index) => (
-          <li key={index}>{genre.name}</li>
-        ))}
-      </ul>
     </div>
   )
 }
