@@ -7,17 +7,19 @@ const { api } = process.env.NODE_ENV === 'production' ? keys_prod : keys_dev
 const MovieDetails = props => {
   const movieId = props.match.params.id
   const [movie, setMovie] = useState({})
+  const [genres, setGenres] = useState([])
 
   useEffect(() => {
     Axios.get(`${api}/api/movies/${movieId}`)
       .then(res => {
         const movieDetails = res.data
+        setGenres(movieDetails.genres)
         setMovie(movieDetails)
       })
       .catch(err => {
         console.log(err.response)
       })
-  }, [movieId, movie])
+  }, [movieId])
 
   return (
     <div>
@@ -28,6 +30,11 @@ const MovieDetails = props => {
       />
       <p>{movie.overview}</p>
       <p>Genres</p>
+      <ul>
+        {genres.map(genre => (
+          <li key={genre.id}>{genre.name}</li>
+        ))}
+      </ul>
     </div>
   )
 }
