@@ -8,13 +8,22 @@ const MovieDetails = props => {
   const movieId = props.match.params.id
   const [movie, setMovie] = useState({})
   const [genres, setGenres] = useState([])
+  const [actors, setActors] = useState([])
 
   useEffect(() => {
     Axios.get(`${api}/api/movies/${movieId}`)
       .then(res => {
         const movieDetails = res.data
+        const movieId = res.data.id
         setGenres(movieDetails.genres)
         setMovie(movieDetails)
+        Axios.get(`${api}/api/movies/${movieId}/cast`)
+          .then(response => {
+            setActors(response.data)
+          })
+          .catch(err => {
+            console.log(err)
+          })
       })
       .catch(err => {
         console.log(err.response)
@@ -35,6 +44,13 @@ const MovieDetails = props => {
           <li key={genre.id}>{genre.name}</li>
         ))}
       </ul>
+      <h2>Cast</h2>
+      {actors.map(actor => (
+        <div>
+          <img src={`http://image.tmdb.org/t/p/w500${actor.profile_path}`} />
+          <h3>{actor.name}</h3>
+        </div>
+      ))}
     </div>
   )
 }
