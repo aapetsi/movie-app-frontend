@@ -45,12 +45,14 @@ const MovieDetails = props => {
         ))}
       </ul>
       <h2>Cast</h2>
-      {actors.map(actor => (
-        <div>
-          <img src={`http://image.tmdb.org/t/p/w500${actor.profile_path}`} />
-          <h3>{actor.name}</h3>
-        </div>
-      ))}
+      <div>
+        {actors.map(actor => (
+          <div>
+            <img src={`http://image.tmdb.org/t/p/w500${actor.profile_path}`} />
+            <h3>{actor.name}</h3>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
