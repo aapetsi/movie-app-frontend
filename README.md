@@ -1,3 +1,8 @@
+[![Build Status](https://travis-ci.org/aapetsi/movie-app-frontend.svg?branch=master)](https://travis-ci.org/aapetsi/movie-app-frontend)
+[![Maintainability](https://api.codeclimate.com/v1/badges/219e26eca399f592f5ad/maintainability)](https://codeclimate.com/github/aapetsi/movie-app-frontend/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/219e26eca399f592f5ad/test_coverage)](https://codeclimate.com/github/aapetsi/movie-app-frontend/test_coverage)
+[![Coverage Status](https://coveralls.io/repos/github/aapetsi/movie-app-frontend/badge.svg)](https://coveralls.io/github/aapetsi/movie-app-frontend)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
